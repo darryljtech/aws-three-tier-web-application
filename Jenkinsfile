@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Change to the Terraform directory in the Git repository
-                    dir('/terraform') {
+                    dir('./terraform') {
                         // Run Terraform init
                         sh 'terraform init'
                     }
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Change to the Terraform directory in the Git repository
-                    dir('/terraform') {
+                    dir('./terraform') {
                         // Run Terraform plan and save the output to a file
                         sh 'terraform plan -out=tfplan'
                     }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Change to the Terraform directory in the Git repository
-                    dir('/terraform') {
+                    dir('./terraform') {
                         // Apply the Terraform plan
                         sh 'terraform apply -auto-approve tfplan'
                     }
@@ -43,7 +43,7 @@ pipeline {
         always {
             // Clean up Terraform plan file
             script {
-                deleteFile('/terraform/tfplan')
+                deleteFile('./terraform/tfplan')
             }
         }
     }
