@@ -42,15 +42,15 @@ pipeline {
     post {
         always {
             // Clean up Terraform plan file
-            deleteFile('/terraform/tfplan')
+            script {
+                deleteFile('/terraform/tfplan')
+            }
         }
     }
 }
 
 // Function to delete a file if it exists
 def deleteFile(filename) {
-    def file = new File(filename)
-    if (file.exists()) {
-        file.delete()
-    }
+    sh "rm -f ${filename}"
 }
+
